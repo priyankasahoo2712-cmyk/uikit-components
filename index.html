@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UIKit — CSS Component Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0e0e0e;
+      --surface: #1a1a1a;
+      --border:  #2a2a2a;
+      --text:    #f0f0f0;
+      --muted:   #888;
+      --yellow:  #f5d90a;
+      --pink:    #ff4d8d;
+      --cyan:    #00e5cc;
+      --purple:  #a855f7;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      padding: 2.5rem 5%;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .brand { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; }
+    .brand span { color: var(--yellow); }
+    .header-sub { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+
+    /* NAV PILLS */
+    .nav-pills {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      padding: 1.2rem 5%;
+      border-bottom: 1px solid var(--border);
+    }
+    .pill {
+      padding: 0.4rem 1rem; border-radius: 50px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.8rem; cursor: pointer;
+      transition: all 0.2s; font-family: 'Space Mono', monospace;
+    }
+    .pill.active, .pill:hover { background: var(--yellow); color: #000; border-color: var(--yellow); }
+
+    /* SECTIONS */
+    .page { padding: 4rem 5%; }
+    .section { margin-bottom: 5rem; }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-title {
+      font-size: 1.1rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--yellow);
+      font-family: 'Space Mono', monospace;
+      margin-bottom: 0.4rem;
+    }
+    .section-desc { color: var(--muted); font-size: 0.9rem; }
+
+    .showcase {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: flex-start;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.6rem; border-radius: 8px; border: none;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer;
+      font-family: 'Syne', sans-serif;
+      transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-solid-yellow { background: var(--yellow); color: #000; }
+    .btn-solid-yellow:hover { box-shadow: 0 6px 20px rgba(245,217,10,0.35); }
+
+    .btn-solid-pink { background: var(--pink); color: #fff; }
+    .btn-solid-pink:hover { box-shadow: 0 6px 20px rgba(255,77,141,0.35); }
+
+    .btn-solid-cyan { background: var(--cyan); color: #000; }
+    .btn-solid-cyan:hover { box-shadow: 0 6px 20px rgba(0,229,204,0.35); }
+
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    .btn-ghost { background: transparent; color: var(--muted); }
+    .btn-ghost:hover { color: var(--text); background: var(--border); }
+
+    .btn-sm { padding: 0.45rem 1rem; font-size: 0.78rem; }
+    .btn-lg { padding: 1rem 2.2rem; font-size: 1rem; border-radius: 12px; }
+    .btn-pill { border-radius: 50px; }
+    .btn-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+    /* ── BADGES ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.3rem 0.75rem; border-radius: 50px;
+      font-size: 0.72rem; font-weight: 700;
+      font-family: 'Space Mono', monospace; letter-spacing: 0.03em;
+    }
+    .badge-dot::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      display: inline-block; background: currentColor;
+    }
+    .badge-yellow { background: rgba(245,217,10,0.15); color: var(--yellow); border: 1px solid rgba(245,217,10,0.3); }
+    .badge-pink   { background: rgba(255,77,141,0.15); color: var(--pink);   border: 1px solid rgba(255,77,141,0.3); }
+    .badge-cyan   { background: rgba(0,229,204,0.15);  color: var(--cyan);   border: 1px solid rgba(0,229,204,0.3); }
+    .badge-purple { background: rgba(168,85,247,0.15); color: var(--purple); border: 1px solid rgba(168,85,247,0.3); }
+    .badge-muted  { background: var(--border); color: var(--muted); }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      width: 240px;
+    }
+    .card:hover { border-color: var(--yellow); transform: translateY(-4px); }
+    .card-img {
+      height: 120px; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .card-body { padding: 1.2rem; }
+    .card-tag { font-size: 0.7rem; font-family: 'Space Mono', monospace; color: var(--muted); margin-bottom: 0.4rem; }
+    .card-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .card-text { font-size: 0.83rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; }
+
+    /* ── ALERTS ── */
+    .alert {
+      padding: 1rem 1.4rem; border-radius: 12px; border-left: 4px solid;
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      font-size: 0.88rem; line-height: 1.5; width: 100%;
+    }
+    .alert-icon { font-size: 1rem; margin-top: 0.05rem; flex-shrink: 0; }
+    .alert-title { font-weight: 700; margin-bottom: 0.2rem; }
+    .alert-success { background: rgba(0,229,204,0.08); border-color: var(--cyan); color: var(--cyan); }
+    .alert-error   { background: rgba(255,77,141,0.08); border-color: var(--pink); color: var(--pink); }
+    .alert-warning { background: rgba(245,217,10,0.08); border-color: var(--yellow); color: var(--yellow); }
+    .alert-info    { background: rgba(168,85,247,0.08); border-color: var(--purple); color: var(--purple); }
+
+    /* ── INPUTS ── */
+    .input-group { display: flex; flex-direction: column; gap: 0.5rem; min-width: 220px; }
+    .input-label { font-size: 0.8rem; font-weight: 600; color: var(--muted); font-family: 'Space Mono', monospace; }
+    .input {
+      background: var(--bg); border: 1.5px solid var(--border);
+      color: var(--text); padding: 0.7rem 1rem; border-radius: 10px;
+      font-size: 0.9rem; font-family: 'Syne', sans-serif;
+      outline: none; transition: border-color 0.2s;
+      width: 100%;
+    }
+    .input:focus { border-color: var(--yellow); }
+    .input::placeholder { color: var(--muted); }
+    .input-error { border-color: var(--pink) !important; }
+    .input-hint { font-size: 0.75rem; color: var(--pink); margin-top: -0.3rem; }
+
+    /* ── TOGGLE ── */
+    .toggle-wrap { display: flex; align-items: center; gap: 0.8rem; }
+    .toggle { position: relative; width: 46px; height: 24px; cursor: pointer; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; inset: 0; background: var(--border);
+      border-radius: 50px; transition: background 0.3s;
+    }
+    .slider::before {
+      content: ''; position: absolute;
+      width: 18px; height: 18px; border-radius: 50%; background: #fff;
+      left: 3px; top: 3px; transition: transform 0.3s;
+    }
+    .toggle input:checked + .slider { background: var(--yellow); }
+    .toggle input:checked + .slider::before { transform: translateX(22px); background: #000; }
+    .toggle-label { font-size: 0.88rem; color: var(--muted); }
+
+    /* ── AVATAR ── */
+    .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.95rem; flex-shrink: 0;
+    }
+    .avatar-group { display: flex; }
+    .avatar-group .avatar { margin-left: -10px; border: 2px solid var(--bg); }
+    .avatar-group .avatar:first-child { margin-left: 0; }
+    .avatar-yellow { background: var(--yellow); color: #000; }
+    .avatar-pink   { background: var(--pink);   color: #fff; }
+    .avatar-cyan   { background: var(--cyan);   color: #000; }
+    .avatar-purple { background: var(--purple); color: #fff; }
+    .avatar-count  { background: var(--border); color: var(--muted); font-size: 0.78rem; }
+
+    /* ── PROGRESS ── */
+    .progress-wrap { width: 100%; }
+    .progress-label { display: flex; justify-content: space-between; font-size: 0.78rem; margin-bottom: 0.4rem; }
+    .progress-label span:first-child { color: var(--muted); }
+    .progress-label span:last-child { font-weight: 700; }
+    .progress-bar {
+      width: 100%; height: 8px; background: var(--border); border-radius: 50px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 50px;
+      animation: grow 1.2s cubic-bezier(.4,0,.2,1) both;
+    }
+    .fill-yellow { background: var(--yellow); width: 78%; }
+    .fill-cyan   { background: var(--cyan);   width: 55%; }
+    .fill-pink   { background: var(--pink);   width: 92%; }
+
+    @keyframes grow { from { width: 0%; } }
+
+    /* ── TOOLTIP ── */
+    .tooltip-wrap { position: relative; display: inline-block; }
+    .tooltip-wrap .tooltip-box {
+      position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%);
+      background: var(--text); color: var(--bg);
+      padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem;
+      white-space: nowrap; opacity: 0; pointer-events: none;
+      transition: opacity 0.15s; font-family: 'Space Mono', monospace;
+    }
+    .tooltip-wrap .tooltip-box::after {
+      content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      border: 5px solid transparent; border-top-color: var(--text);
+    }
+    .tooltip-wrap:hover .tooltip-box { opacity: 1; }
+
+    @media (max-width: 600px) {
+      .showcase { padding: 1.5rem; }
+      .card { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="brand">UI<span>Kit</span></div>
+    <div class="header-sub">// CSS Component Library v1.0</div>
+  </div>
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+    <span class="badge badge-cyan badge-dot">Open Source</span>
+    <span class="badge badge-yellow">Dark Theme</span>
+  </div>
+</header>
+
+<div class="nav-pills">
+  <span class="pill active">All</span>
+  <span class="pill">Buttons</span>
+  <span class="pill">Cards</span>
+  <span class="pill">Badges</span>
+  <span class="pill">Forms</span>
+  <span class="pill">Feedback</span>
+</div>
+
+<main class="page">
+
+  <!-- BUTTONS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Buttons</div>
+      <div class="section-desc">Solid, outline, ghost variants with sizes and states</div>
+    </div>
+    <div class="showcase" style="flex-direction:column;gap:1.5rem;">
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+        <button class="btn btn-solid-yellow">Primary</button>
+        <button class="btn btn-solid-pink">Danger</button>
+        <button class="btn btn-solid-cyan">Success</button>
+        <button class="btn btn-outline">Outline</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-solid-yellow btn-disabled">Disabled</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+        <button class="btn btn-solid-yellow btn-sm">Small</button>
+        <button class="btn btn-solid-yellow">Default</button>
+        <button class="btn btn-solid-yellow btn-lg">Large</button>
+        <button class="btn btn-solid-pink btn-pill">Pill Button</button>
+        <button class="btn btn-outline btn-pill">Pill Outline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BADGES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Badges</div>
+      <div class="section-desc">Status indicators, labels, and tags</div>
+    </div>
+    <div class="showcase">
+      <span class="badge badge-yellow badge-dot">Active</span>
+      <span class="badge badge-pink badge-dot">Error</span>
+      <span class="badge badge-cyan badge-dot">Online</span>
+      <span class="badge badge-purple badge-dot">Beta</span>
+      <span class="badge badge-muted">Draft</span>
+      <span class="badge badge-yellow">New</span>
+      <span class="badge badge-pink">Hot</span>
+      <span class="badge badge-cyan">Verified</span>
+      <span class="badge badge-purple">Pro</span>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Cards</div>
+      <div class="section-desc">Flexible content containers with hover states</div>
+    </div>
+    <div class="showcase">
+      <div class="card">
+        <div class="card-img" style="background:rgba(245,217,10,0.08);">🚀</div>
+        <div class="card-body">
+          <div class="card-tag">PRODUCT</div>
+          <div class="card-title">Launch Kit</div>
+          <div class="card-text">Everything you need to ship your next project fast.</div>
+          <div class="card-footer">
+            <span class="badge badge-yellow">Free</span>
+            <button class="btn btn-solid-yellow btn-sm">Get it</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:rgba(255,77,141,0.08);">🎨</div>
+        <div class="card-body">
+          <div class="card-tag">DESIGN</div>
+          <div class="card-title">Design System</div>
+          <div class="card-text">Consistent tokens, spacing, and color palettes.</div>
+          <div class="card-footer">
+            <span class="badge badge-pink">v2.1</span>
+            <button class="btn btn-solid-pink btn-sm">Explore</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:rgba(0,229,204,0.08);">⚡</div>
+        <div class="card-body">
+          <div class="card-tag">PERFORMANCE</div>
+          <div class="card-title">Speed Boost</div>
+          <div class="card-text">Optimised animations and zero-bloat CSS.</div>
+          <div class="card-footer">
+            <span class="badge badge-cyan">Stable</span>
+            <button class="btn btn-solid-cyan btn-sm">Docs</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALERTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Alerts</div>
+      <div class="section-desc">Feedback messages for all states</div>
+    </div>
+    <div class="showcase" style="flex-direction:column;">
+      <div class="alert alert-success"><span class="alert-icon">✅</span><div><div class="alert-title">Success</div>Your changes have been saved successfully.</div></div>
+      <div class="alert alert-error"><span class="alert-icon">❌</span><div><div class="alert-title">Error</div>Something went wrong. Please try again.</div></div>
+      <div class="alert alert-warning"><span class="alert-icon">⚠️</span><div><div class="alert-title">Warning</div>Your session will expire in 5 minutes.</div></div>
+      <div class="alert alert-info"><span class="alert-icon">💡</span><div><div class="alert-title">Info</div>A new version is available. Refresh to update.</div></div>
+    </div>
+  </div>
+
+  <!-- FORMS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Form Inputs</div>
+      <div class="section-desc">Text fields, toggles, and states</div>
+    </div>
+    <div class="showcase" style="flex-direction:column;gap:1.5rem;">
+      <div style="display:flex;flex-wrap:wrap;gap:1.5rem;">
+        <div class="input-group">
+          <label class="input-label">Default</label>
+          <input class="input" placeholder="Enter your name" />
+        </div>
+        <div class="input-group">
+          <label class="input-label">Error State</label>
+          <input class="input input-error" value="wrong@" />
+          <span class="input-hint">Enter a valid email address</span>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Disabled</label>
+          <input class="input" placeholder="Cannot edit" disabled style="opacity:0.4;cursor:not-allowed;" />
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center;">
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" checked/><span class="slider"></span></label>
+          <span class="toggle-label">Notifications on</span>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox"/><span class="slider"></span></label>
+          <span class="toggle-label">Dark mode</span>
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" checked/><span class="slider"></span></label>
+          <span class="toggle-label">Auto-save</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AVATARS + PROGRESS + TOOLTIPS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Extras</div>
+      <div class="section-desc">Avatars, progress bars, and tooltips</div>
+    </div>
+    <div class="showcase" style="flex-direction:column;gap:2rem;">
+      <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+        <div class="avatar avatar-yellow">PS</div>
+        <div class="avatar avatar-pink">AM</div>
+        <div class="avatar avatar-cyan">RK</div>
+        <div class="avatar avatar-purple">NV</div>
+        <div style="margin-left:1rem;">
+          <div class="avatar-group">
+            <div class="avatar avatar-yellow">A</div>
+            <div class="avatar avatar-pink">B</div>
+            <div class="avatar avatar-cyan">C</div>
+            <div class="avatar avatar-count">+5</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1rem;width:100%;max-width:400px;">
+        <div class="progress-wrap">
+          <div class="progress-label"><span>CSS Proficiency</span><span style="color:var(--yellow)">78%</span></div>
+          <div class="progress-bar"><div class="progress-fill fill-yellow"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>JavaScript</span><span style="color:var(--cyan)">55%</span></div>
+          <div class="progress-bar"><div class="progress-fill fill-cyan"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>HTML Semantics</span><span style="color:var(--pink)">92%</span></div>
+          <div class="progress-bar"><div class="progress-fill fill-pink"></div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+        <div class="tooltip-wrap">
+          <button class="btn btn-outline">Hover me ↑</button>
+          <div class="tooltip-box">Tooltip content here</div>
+        </div>
+        <div class="tooltip-wrap">
+          <button class="btn btn-solid-yellow">Another tooltip</button>
+          <div class="tooltip-box">Click to perform action</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+</body>
+</html>
